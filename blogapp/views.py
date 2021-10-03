@@ -9,3 +9,7 @@ def post_list(request):
 def post_details(request,post):
     post = get_object_or_404(models.Post, slug = post, status = 'publised')
     return render(request, 'blogapp/post_detail.html', {'post': post})
+"""
+def test_view(request):
+    return render(request, 'blogapp/home.html',)
+"""
