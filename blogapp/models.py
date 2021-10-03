@@ -8,7 +8,9 @@ STATUS_CHOICES = (
     ('draft', 'Draft'),
     ('published', 'Published'),
     )
-
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset().filter(status = 'published')
 
 
 class Post(models.Model):
@@ -21,7 +23,8 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-
+    objects = models.Manager() #default manager
+    pulished = PublishedManager()  #custom manager
     class Meta:
         ordering = ('-publish',)
     
